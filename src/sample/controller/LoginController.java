@@ -4,7 +4,13 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -29,9 +35,41 @@ public class LoginController {
 
     @FXML
     void initialize() {
-        loginButton.setOnAction(event -> {
-            System.out.println("eloooo");
+
+        String loginText = loginUsername.getText().trim();
+        String loginPwd  = loginPassword.getText().trim();
+
+
+
+
+        loginSignupButton.setOnAction(event -> {
+            //Take users to signup screen
+            loginSignupButton.getScene().getWindow().hide();
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("/sample/view/signup.fxml"));
+
+
+            Parent root = loader.getRoot();
+            Stage stage = new Stage();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+
         });
 
+        loginButton.setOnAction(event -> {
+            if (loginText.equals("") || !loginPwd.equals("")) {
+                loginUser(loginText, loginPwd);
+            }else{
+                System.out.println("error login in user");
+            }
+
+        });
+
+    }
+
+    private void loginUser(String userName, String password) {
+        //Chcek in the batabase if user exists,if
+        //we take them to AddItem Screen
     }
 }
