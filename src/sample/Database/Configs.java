@@ -7,4 +7,5 @@ public class Configs {
     protected String dbPass = "12345678";
     protected String dbName = "todo";
 
+
 }
