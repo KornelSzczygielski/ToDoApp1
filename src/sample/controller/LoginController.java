@@ -9,9 +9,13 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import sample.Database.DatabaseHandler;
+import sample.model.User;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class LoginController {
@@ -33,13 +37,47 @@ public class LoginController {
     @FXML
     private JFXButton loginSignupButton;
 
+    private DatabaseHandler databaseHandler;
+
     @FXML
     void initialize() {
 
-        String loginText = loginUsername.getText().trim();
-        String loginPwd  = loginPassword.getText().trim();
+        databaseHandler = new DatabaseHandler();
 
 
+
+        loginButton.setOnAction(event -> {
+
+            String loginText = loginUsername.getText().trim();
+            String loginPwd = loginPassword.getText().trim();
+
+            User user = new User();
+            user.setUserName(loginText);
+            user.setPassword(loginPwd);
+
+            ResultSet userRow = databaseHandler.getUser(user);
+
+            int counter = 0;
+
+            try{
+                while (userRow.next()) {
+                    counter++;
+                    String name = userRow.getString("firstname");
+
+                    System.out.println("Czesc " + name);
+                }
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+
+
+
+
+            if (counter == 1){
+                System.out.println("Login Successful!");
+            }
+
+        });
 
 
         loginSignupButton.setOnAction(event -> {
@@ -63,19 +101,7 @@ public class LoginController {
 
         });
 
-        loginButton.setOnAction(event -> {
-            if (loginText.equals("") || !loginPwd.equals("")) {
-                loginUser(loginText, loginPwd);
-            }else{
-                System.out.println("error login in user");
-            }
-
-        });
 
     }
 
-    private void loginUser(String userName, String password) {
-        //Chcek in the batabase if user exists,if
-        //we take them to AddItem Screen
-    }
 }
