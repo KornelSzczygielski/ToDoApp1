@@ -1,5 +1,6 @@
 package sample.controller;
 
+import sample.animations.Shaker;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
@@ -66,15 +67,23 @@ public class LoginController {
 
                     System.out.println("Czesc " + name);
                 }
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
 
 
 
 
             if (counter == 1){
-                System.out.println("Login Successful!");
+
+                showAddItemScreen();
+
+            }else {
+                Shaker userNameShaker = new Shaker(loginUsername);
+                Shaker passwordShaker = new Shaker(loginPassword);
+                userNameShaker.shake();
+                passwordShaker.shake();
+
             }
 
         });
@@ -104,4 +113,25 @@ public class LoginController {
 
     }
 
+    private void showAddItemScreen() {
+        //Take users to AddIttem screen
+        loginSignupButton.getScene().getWindow().hide();
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("/sample/view/addItem.fxml"));
+
+        try {
+            loader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+        Parent root = loader.getRoot();
+        Stage stage = new Stage();
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+
 }
+
