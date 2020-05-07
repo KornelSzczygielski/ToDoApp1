@@ -1,5 +1,6 @@
 package sample.Database;
 
+import sample.model.Task;
 import sample.model.User;
 
 import java.sql.*;
@@ -44,6 +45,24 @@ public class DatabaseHandler extends Configs{
         }
     }
 
+    public void signUpTask(Task task){
+        String insert = "INSERT INTO " + Const.TASKS_TABLE + "(" + Const.TASKS_DATE + "," + Const.TASKS_DESCRIPTION + ")"
+                 + "VALUES(?,?)";
+
+        try {
+            PreparedStatement preparedStatement = getDbConnection().prepareStatement(insert);
+
+            preparedStatement.setString(1,task.getDatecreated());
+            preparedStatement.setString(2,task.getDescription());
+
+
+            preparedStatement.executeUpdate();
+
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
     public ResultSet getUser(User user) {
        ResultSet resultSet =null;
 
@@ -74,6 +93,27 @@ public class DatabaseHandler extends Configs{
        }
 
        return resultSet;
+    }
+
+    public ResultSet getTask(Task task){
+       ResultSet resultSet=null;
+
+        String query = "SELECT * FROM " + Const.USERS_TABLE + " WHERE "
+                + Const.USERS_USERNAME + " =? " + " AND " + Const.USERS_PASSWORD
+                + " =? ";
+        try {
+       PreparedStatement preparedStatement = getDbConnection().prepareStatement(query);
+        preparedStatement.setString(1,task.getDatecreated());
+        preparedStatement.setString(2,task.getDescription());
+        resultSet = preparedStatement.executeQuery();
+        }catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+
+        return resultSet;
     }
 
 }

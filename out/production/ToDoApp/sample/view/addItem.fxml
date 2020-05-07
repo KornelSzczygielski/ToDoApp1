@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXButton?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.controller.AddItemController">
+<AnchorPane fx:id="rootPane" prefHeight="400.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.controller.AddItemController">
    <children>
       <AnchorPane prefHeight="96.0" prefWidth="700.0" style="-fx-background-color: #d32f2f;">
          <children>
@@ -17,15 +20,27 @@
             </Label>
          </children>
       </AnchorPane>
-      <Label fx:id="notTaskLabel" alignment="CENTER" layoutX="214.0" layoutY="177.0" prefHeight="46.0" prefWidth="272.0" text="Not Tasks for Today, yet!" textFill="#757474">
+      <Label fx:id="notTaskLabel" alignment="CENTER" layoutX="214.0" layoutY="258.0" prefHeight="46.0" prefWidth="272.0" text="Not Tasks for Today, yet!" textFill="#757474">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <ImageView fx:id="addButton" fitHeight="82.0" fitWidth="129.0" layoutX="309.0" layoutY="257.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="addButton" fitHeight="82.0" fitWidth="129.0" layoutX="309.0" layoutY="304.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../assets/add_circle_grey_192x192.png" />
          </image>
       </ImageView>
+      <ImageView fx:id="refreshButton" fitHeight="39.0" fitWidth="63.0" layoutX="655.0" layoutY="96.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../assets/icon_update.png" />
+         </image>
+      </ImageView>
+      <TableView fx:id="tableTask" layoutX="7.0" layoutY="96.0" prefHeight="200.0" prefWidth="452.0">
+         <columns>
+            <TableColumn fx:id="col_date" prefWidth="188.0" text="datecreated" />
+            <TableColumn fx:id="col_desc" minWidth="0.0" prefWidth="263.0" text="description" />
+         </columns>
+      </TableView>
+      <JFXButton fx:id="refreshClicker" layoutX="629.0" layoutY="345.0" text="Refresh" />
    </children>
 </AnchorPane>

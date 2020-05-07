@@ -1,24 +1,26 @@
 package sample.model;
 
+import com.jfoenix.controls.JFXTextField;
+
 public class Task {
-    private long datecreated;
+    private String datecreated;
     private String description;
-    private String task;
+
 
     public Task() {
     }
 
-    public Task(long datecreated, String description, String task) {
+    public Task(String datecreated, String description) {
         this.datecreated = datecreated;
         this.description = description;
-        this.task = task;
+
     }
 
-    public long getDatecreated() {
+    public String getDatecreated() {
         return datecreated;
     }
 
-    public void setDatecreated(long datecreated) {
+    public void setDatecreated(String datecreated) {
         this.datecreated = datecreated;
     }
 
@@ -30,11 +32,4 @@ public class Task {
         this.description = description;
     }
 
-    public String getTask() {
-        return task;
-    }
-
-    public void setTask(String task) {
-        this.task = task;
-    }
 }
